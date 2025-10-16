@@ -5,7 +5,7 @@ class Database {
     private $host = "localhost";
     private $username = "root";
     private $password = "";
-    private $database = "library_management";
+    private $database = "librix";
     public $conn;
 
     public function __construct() {
