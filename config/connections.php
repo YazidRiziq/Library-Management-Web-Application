@@ -1,14 +1,27 @@
-<?php 
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $db = "latihanphp";
+<?php
+// config/connections.php
 
-    $conn = mysqli_connect($host, $user, $pass, $db);
+class Database {
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $database = "library_management";
+    public $conn;
 
-    //untuk cek koneksi berhasil atau tidak
-    if (!$conn) {
-        die("Koneksi Gagal: " . mysqli_connect_error());
+    public function __construct() {
+        $this->connectDatabase();
     }
 
+    private function connectDatabase() {
+        $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database);
+
+        if ($this->conn->connect_error) {
+            die("Database Connection Failed: " . $this->conn->connect_error);
+        }
+    }
+
+    public function getConnection() {
+        return $this->conn;
+    }
+}
 ?>
