@@ -7,41 +7,41 @@ class BookModel extends BaseModel {
 
     // Ambil semua buku
     public function getAllBooks() {
-        $sql = "SELECT * FROM book ORDER BY BookTitle ASC";
+        $sql = "SELECT * FROM Book ORDER BY BookTitle ASC";
         return $this->fetchAll($sql);
     }
 
     // Ambil satu buku berdasarkan ID
-    public function getBookById($bookCode) {
-        $sql = "SELECT * FROM book WHERE BookCode = ?";
-        return $this->fetch($sql, [$bookCode]);
+    public function getBookById($BookCode) {
+        $sql = "SELECT * FROM Book WHERE BookCode = ?";
+        return $this->fetch($sql, [$BookCode]);
     }
 
     // Tambah buku baru
-    public function addBook($catName, $isbn, $bookTitle, $autName, $publisher, $pubYear, $numPages, $totalCopies) {
+    public function addBook($CatName, $ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $TotalCopies) {
         $sql = "CALL AddBook(?, ?, ?, ?, ?, ?, ?, ?)";
-        $this->query($sql, [$catName, $isbn, $bookTitle, $autName, $publisher, $pubYear, $numPages, $totalCopies]);
+        $this->query($sql, [$CatName, $ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $TotalCopies]);
     }
 
     // Update data buku
-    public function updateBook($bookCode, $isbn, $bookTitle, $autName, $publisher, $pubYear, $numPages, $totalCopies) {
+    public function updateBook($BookCode, $ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $TotalCopies) {
         $sql = "UPDATE book SET ISBN = ?, BookTitle = ?, AutName = ?, Publisher = ?, PubYear = ?, NumPages = ?, Total Copies = ? WHERE BookCode = ?";
-        $this->query($sql, [$isbn, $bookTitle, $autName, $publisher, $pubYear, $numPages, $totalCopies, $bookCode]);
+        $this->query($sql, [$ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $TotalCopies, $BookCode]);
     }
 
     // Hapus buku
-    public function deleteBook($bookCode) {
-        $sql = "DELETE FROM book WHERE BookCode = ?";
-        $this->query($sql, [$bookCode]);
+    public function deleteBook($BookCode) {
+        $sql = "DELETE FROM Book WHERE BookCode = ?";
+        $this->query($sql, [$BookCode]);
     }
 
     // Cari buku berdasarkan judul
     public function searchBook($keyword) {
-        $sql = "SELECT * FROM book WHERE BookTitle LIKE ?";
+        $sql = "SELECT * FROM Book WHERE BookTitle LIKE ?";
         return $this->fetchAll($sql, ["%$keyword%"]);
     }
 
-    // Validasi ketersediaan buku
+    // Validasi ketersediaan buku --------------------------------------------------------
     # Perbaiki code ini untuk fetch kembali dari table View_BookStatus sesuai kebutuhan nantinya
     public function isBookAvailable($bookCode) {
         $book = $this->getBookById($bookCode);
