@@ -1,17 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION['role'])) {
-    // Redirect langsung jika sudah login
-    if ($_SESSION['role'] === 'member') {
-        header("Location: ../member/dashboard.php");
-        exit();
-    } else if ($_SESSION['role'] === 'officer') {
-        header("Location: ../officer/dashboard.php");
-        exit();
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,16 +18,8 @@ if (isset($_SESSION['role'])) {
         <form action="../../controllers/login_process.php" method="POST" class="space-y-4">
             
             <div>
-                <label class="block text-gray-700 font-medium mb-1">Login As</label>
-                <select name="role" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400">
-                    <option value="member">Member</option>
-                    <option value="officer">Officer</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-gray-700 font-medium mb-1">Email / Username</label>
-                <input type="text" name="username" required class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400" placeholder="Enter your email or username">
+                <label class="block text-gray-700 font-medium mb-1">Email</label>
+                <input type="email" name="email" required class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400" placeholder="Enter your email or username">
             </div>
 
             <div>

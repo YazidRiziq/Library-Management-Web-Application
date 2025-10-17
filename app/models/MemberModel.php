@@ -11,40 +11,41 @@ class MemberModel extends BaseModel {
         return $this->fetchAll($sql);
     }
 
-    // Ambil data member berdasarkan ID
-    public function getMemberById($member_id) {
-        $sql = "SELECT * FROM Member WHERE id = ?";
-        return $this->fetch($sql, [$member_id]);
+    // Ambil data member berdasarkan ID 
+    public function getMemberById($MemID) {
+        $sql = "SELECT * FROM Member WHERE MemID = ?";
+        return $this->fetch($sql, [$MemID]);
     }
 
-    // Tambah member baru (saat registrasi)
-    public function addMember($name, $email, $password, $address, $phone) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO members (name, email, password, address, phone) VALUES (?, ?, ?, ?, ?)";
-        $this->query($sql, [$name, $email, $hashedPassword, $address, $phone]);
+    // Ambil data member berdasarkan Name
+    public function getMemberByName($MemName) {
+        $sql = "SELECT * FROM Member WHERE MemName = ?";
+        return $this->fetch($sql, [$MemName]);
     }
 
-    // Update data member
+    // Ambil data member berdasarkan email 
+    public function getMemberByEmail($MemEmail) {
+        $sql = "SELECT * FROM Member WHERE MemEmail = ?";
+        return $this->fetch($sql, [$MemEmail]);
+    }
+
+    // Tambah member baru (saat registrasi) --------------
+    public function addMember($username, $email, $password, $telp, $address) {
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $sql = "CALL AddMember (?, ?, ?, ?, ?)";
+        $this->query($sql, [$username, $email, $telp, $address, $hashedPassword]);
+    }
+
+    // Update data member------------
     public function updateMember($member_id, $name, $email, $address, $phone) {
         $sql = "UPDATE members SET name = ?, email = ?, address = ?, phone = ? WHERE id = ?";
         $this->query($sql, [$name, $email, $address, $phone, $member_id]);
     }
 
-    // Hapus member
+    // Hapus member---------------
     public function deleteMember($member_id) {
         $sql = "DELETE FROM members WHERE id = ?";
         $this->query($sql, [$member_id]);
-    }
-
-    // Validasi login member
-    public function validateLogin($email, $password) {
-        $sql = "SELECT * FROM members WHERE email = ?";
-        $member = $this->fetch($sql, [$email]);
-
-        if ($member && password_verify($password, $member['password'])) {
-            return $member;
-        }
-        return false;
     }
 
     // Cek apakah email sudah digunakan
