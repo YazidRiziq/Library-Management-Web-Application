@@ -28,9 +28,9 @@ class AuthController {
         $member = $this->memberModel->getMemberByEmail($email);
 
         if ($member && password_verify($password, $member['MemPassword'])) {
-            $_SESSION['member_id'] = $member['MemID'];
-            $_SESSION['name'] = $member['MemName'];
-            $_SESSION['role'] = 'Member';
+            $_SESSION['MemID'] = $member['MemID'];
+            $_SESSION['MemName'] = $member['MemName'];
+            $_SESSION['Role'] = 'Member';
             header("Location: ../views/member/dashboard.php");
             exit();
         }
