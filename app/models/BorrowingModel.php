@@ -11,4 +11,9 @@ class BorrowingModel extends BaseModel {
         return $this->fetchAll($sql, [$MemID]);
     }
 
+    public function getActiveBorrowings($MemID) {
+        $sql = "SELECT * FROM view_borrowedbooks WHERE MemID = ?";
+        return $this->fetchAll($sql, [$MemID]);
+    }
+
 } 

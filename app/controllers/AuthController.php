@@ -17,9 +17,9 @@ class AuthController {
         // 1️⃣ Cek di Officer
         $officer = $this->officerModel->getOfficerByEmail($email);
         if ($officer && $password == $officer['OffPassword']) {
-            $_SESSION['OffID'] = $officer['OffID'];
-            $_SESSION['OffName'] = $officer['OffName'];
-            $_SESSION['Role'] = 'Officer';
+            $_SESSION['officer_id'] = $officer['OffID'];
+            $_SESSION['name'] = $officer['OffName'];
+            $_SESSION['role'] = 'officer';
             header("Location: ../views/officer/dashboard.php");
             exit();
         }
@@ -28,9 +28,9 @@ class AuthController {
         $member = $this->memberModel->getMemberByEmail($email);
 
         if ($member && password_verify($password, $member['MemPassword'])) {
-            $_SESSION['MemID'] = $member['MemID'];
-            $_SESSION['MemName'] = $member['MemName'];
-            $_SESSION['Role'] = 'Member';
+            $_SESSION['member_id'] = $member['MemID'];
+            $_SESSION['name'] = $member['MemName'];
+            $_SESSION['role'] = 'member';
             header("Location: ../views/member/dashboard.php");
             exit();
         }
@@ -49,13 +49,6 @@ class AuthController {
         // Simpan data
         $this->memberModel->addMember($username, $email, $password, $telp, $address);
         return "Registration successful! Please login.";
-    }
-
-    // === LOGOUT ===
-    public function logout() {
-        session_destroy();
-        header("Location: ../views/auth/login.php");
-        exit();
     }
 }
 ?>

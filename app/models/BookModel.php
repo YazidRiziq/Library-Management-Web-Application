@@ -4,6 +4,18 @@
 require_once 'BaseModel.php';
 
 class BookModel extends BaseModel {
+    
+    // Ambil buku untuk Manage Book Officer
+    public function getAllBooksOfficer() {
+        $sql = "SELECT * FROM view_getallbooks";
+        return $this->fetchAll($sql);
+    }
+
+    // Membuat Copy-an Buku Otomatis
+    public function BookCopy($BookCode) {
+        $sql = "Call AddCopy(?)";
+        return $this->fetch($sql, [$BookCode]);
+    }
 
     // Ambil semua buku
     public function getAllBooks() {
@@ -21,6 +33,12 @@ class BookModel extends BaseModel {
     public function getBookById($BookCode) {
         $sql = "SELECT * FROM Book WHERE BookCode = ?";
         return $this->fetch($sql, [$BookCode]);
+    }
+
+    // Ambil satu buku berdasarkan ISBN
+    public function getBookByISBN($ISBN) {
+        $sql = "SELECT * FROM Book WHERE ISBN = ?";
+        return $this->fetch($sql, [$ISBN]);
     }
 
     // Tambah buku baru
