@@ -11,6 +11,12 @@ class BookModel extends BaseModel {
         return $this->fetchAll($sql);
     }
 
+    // Ambil buku dari View for Book List Member Dashboard
+    public function getAllBookList() {
+        $sql = "SELECT * FROM view_booklistdashboard";
+        return $this->fetchAll($sql);
+    }
+
     // Ambil satu buku berdasarkan ID
     public function getBookById($BookCode) {
         $sql = "SELECT * FROM Book WHERE BookCode = ?";
