@@ -38,14 +38,14 @@ class MemberModel extends BaseModel {
 
     // Update data member------------
     public function updateMember($member_id, $name, $email, $address, $phone) {
-        $sql = "UPDATE members SET name = ?, email = ?, address = ?, phone = ? WHERE id = ?";
+        $sql = "UPDATE Member SET MemName = ?, MemEmail = ?, MemTelp = ?, MemAddress = ? WHERE id = ?";
         $this->query($sql, [$name, $email, $address, $phone, $member_id]);
     }
 
     // Hapus member---------------
-    public function deleteMember($member_id) {
-        $sql = "DELETE FROM members WHERE id = ?";
-        $this->query($sql, [$member_id]);
+    public function deleteMember($MemID) {
+        $sql = "DELETE FROM Member WHERE MemID = ?";
+        $this->query($sql, [$MemID]);
     }
 
     // Cek apakah email sudah digunakan
