@@ -10,8 +10,10 @@ $books = $bookModel->getAllBooksOfficer(); // ambil semua data buku
 
 // Handle delete (jika ada)
 if (isset($_GET['delete'])) {
-  $id = intval($_GET['delete']);
-  if ($bookModel->deleteBook($id)) {
+  $id = ($_GET['delete']);
+
+  if ($id) {
+    $bookModel->DeleteBookAndCopies($id);
     echo "<script>alert('Book deleted successfully!'); window.location='dashboard.php?page=manage_books';</script>";
   } else {
     echo "<script>alert('Failed to delete book!');</script>";

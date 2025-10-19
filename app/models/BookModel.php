@@ -35,6 +35,18 @@ class BookModel extends BaseModel {
         return $this->fetch($sql, [$BookCode]);
     }
 
+    // Ambil copy-an buku berdasarkan ID
+    public function getBookCopyById($BookCode) {
+        $sql = "SELECT * FROM BookCopy WHERE BookCode = ?";
+        return $this->fetch($sql, [$BookCode]);
+    }
+
+    // Menghitung jumlah Copy-an Buku
+    public function countBookCopies($BookCode) {
+        $sql = "SELECT COUNT(*) FROM BookCopy WHERE BookCode = ?";
+        return $this->fetch($sql, [$BookCode]);
+    }
+
     // Ambil satu buku berdasarkan ISBN
     public function getBookByISBN($ISBN) {
         $sql = "SELECT * FROM Book WHERE ISBN = ?";
@@ -48,14 +60,24 @@ class BookModel extends BaseModel {
     }
 
     // Update data buku
-    public function updateBook($BookCode, $ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $TotalCopies) {
-        $sql = "UPDATE book SET ISBN = ?, BookTitle = ?, AutName = ?, Publisher = ?, PubYear = ?, NumPages = ?, Total Copies = ? WHERE BookCode = ?";
-        $this->query($sql, [$ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $TotalCopies, $BookCode]);
+    public function updateBook($BookCode, $ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages) {
+        $sql = "UPDATE Book SET ISBN = ?, BookTitle = ?, AutName = ?, Publisher = ?, PubYear = ?, NumPages = ? WHERE BookCode = ?";
+        $this->query($sql, [$ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $BookCode]);
     }
 
     // Hapus buku
+    public function deleteBookCopy($BookCode) {
+        $sql = "DELETE FROM BookCopy Where BookCode = ?";
+        $this->query($sql, [$BookCode]);
+    }
+
     public function deleteBook($BookCode) {
-        $sql = "DELETE FROM Book WHERE BookCode = ?";
+        $sql = "DELETE FROM Book Where BookCode = ?";
+        $this->query($sql, [$BookCode]);
+    }
+
+    public function DeleteBookAndCopies($BookCode) {
+        $sql = "CALL DeleteBookAndCopies(?)";
         $this->query($sql, [$BookCode]);
     }
 
