@@ -6,7 +6,14 @@ $db = new Database();
 $conn = $db->getConnection();
 
 $bookModel = new BookModel($conn);
+$keyword = $_GET['keyword'] ?? '';
 $books = $bookModel->getAllBooksOfficer(); // ambil semua data buku
+
+if (isset($_GET['keyword'])) {
+  $keyword = trim($_GET['keyword']);
+  $newbooks = $bookModel->searchBook($keyword);
+  $books = $newbooks;
+}
 
 // Handle delete (jika ada)
 if (isset($_GET['delete'])) {
@@ -24,7 +31,17 @@ if (isset($_GET['delete'])) {
 <div class="bg-white p-6 rounded-lg shadow">
   <div class="flex justify-between items-center mb-4">
     <h2 class="text-2xl font-semibold">📖 Manage Books</h2>
+
+    <form method="GET" action="dashboard.php" class="flex gap-2">
+      <input type="hidden" name="page" value="manage_books">
+      <input type="text" name="keyword" placeholder="Search by Title"
+        value="<?= htmlspecialchars($keyword) ?>"
+        class="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Search</button>
+    </form>
+
     <a href="dashboard.php?page=add_book" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Book</a>
+
   </div>
 
   <table class="w-full border-collapse">

@@ -83,7 +83,7 @@ class BookModel extends BaseModel {
 
     // Cari buku berdasarkan judul
     public function searchBook($keyword) {
-        $sql = "SELECT * FROM Book WHERE BookTitle LIKE ?";
+        $sql = "SELECT * FROM view_getallbooks WHERE BookTitle LIKE ?";
         return $this->fetchAll($sql, ["%$keyword%"]);
     }
 
