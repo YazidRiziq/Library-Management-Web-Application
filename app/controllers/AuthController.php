@@ -14,7 +14,7 @@ class AuthController {
 
     // === UNIVERSAL LOGIN ===
     public function login($email, $password) {
-        // 1️⃣ Cek di Officer
+        // Cek Officer
         $officer = $this->officerModel->getOfficerByEmail($email);
         if ($officer && $password == $officer['OffPassword']) {
             $_SESSION['officer_id'] = $officer['OffID'];
@@ -24,7 +24,7 @@ class AuthController {
             exit();
         }
 
-        // 2️⃣ Kalau bukan officer, cek di Member
+        // Cek Member
         $member = $this->memberModel->getMemberByEmail($email);
 
         if ($member && password_verify($password, $member['MemPassword'])) {
@@ -35,7 +35,7 @@ class AuthController {
             exit();
         }
 
-        // 3️⃣ Jika gagal dua-duanya
+        // Jika tidak ada yang cocok
         return "Email or password is incorrect.";
     }
 

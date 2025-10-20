@@ -53,6 +53,12 @@ class BookModel extends BaseModel {
         return $this->fetch($sql, [$ISBN]);
     }
 
+    // Ambil satu buku berdasarkan BookTitle
+    public function getBookByTitle($BookTitle) {
+        $sql = "SELECT * FROM Book WHERE BookTitle LIKE ?";
+        return $this->fetch($sql, ["%$BookTitle"]);
+    }
+
     // Tambah buku baru
     public function addBook($CatName, $ISBN, $BookTitle, $AutName, $Publisher, $PubYear, $NumPages, $TotalCopies) {
         $sql = "CALL AddBook(?, ?, ?, ?, ?, ?, ?, ?)";

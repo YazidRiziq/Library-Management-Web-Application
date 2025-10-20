@@ -54,8 +54,9 @@ $members = $memberModel->getAllMembers();
     </form>
 
     <!-- Member Table -->
+    <div class="h-100 overflow-y-auto">
     <table class="w-full border-collapse">
-        <thead>
+        <thead class="sticky top-0">
             <tr class="bg-gray-100 border-b">
                 <th class="p-3 text-left">#</th>
                 <th class="p-3 text-left">Name</th>
@@ -82,4 +83,5 @@ $members = $memberModel->getAllMembers();
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
 </div>
