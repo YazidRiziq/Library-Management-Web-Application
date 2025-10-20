@@ -1,15 +1,11 @@
 <?php
 require_once '../../../config/connections.php';
 require_once '../../models/BorrowingModel.php';
-require_once '../../models/MemberModel.php';
-require_once '../../models/BookModel.php';
 
 $db = new Database();
 $conn = $db->getConnection();
 
 $borrowingModel = new BorrowingModel($conn);
-$memberModel = new MemberModel($conn);
-$bookModel = new BookModel($conn);
 
 $keyword = $_GET['keyword'] ?? '';
 $statistics = $borrowingModel->getBookStatistics();
