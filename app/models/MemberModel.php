@@ -54,5 +54,12 @@ class MemberModel extends BaseModel {
         $result = $this->fetch($sql, [$email]);
         return $result ? true : false;
     }
+
+    //Ambil data buku yang dipinjam oleh member
+    public function LoanListMember($MemID) {
+        $sql = "SELECT * FROM view_borrowmember WHERE MemID = ?";
+        return $this->fetch($sql, [$MemID]);
+    }
+
 }
 ?>

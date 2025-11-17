@@ -1,13 +1,16 @@
 <?php
 require_once '../../../config/connections.php';
-require_once '../../models/BookModel.php';
+require_once '../../models/MemberModel.php';
 
 $db = new Database();
 $conn = $db->getConnection();
 
-$bookModel = new BookModel($conn);
+$memberModel = new MemberModel($conn);
+
+$id = ($_GET['member_id']);
 $keyword = $_GET['keyword'] ?? '';
-$books = $bookModel->getAllBooksOfficer();
+$books = $memberModel->LoanListMember($id);
+var_dump(($id));
 
 if (isset($_GET['keyword'])) {
   $keyword = trim($_GET['keyword']);

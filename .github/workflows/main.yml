@@ -1,0 +1,29 @@
+name: Deploy PHP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-infinityfree:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Deploy to InfinityFree
+      - name: Deploy to InfinityFree
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          username: ${{ secrets.INFINITYFREE_USERNAME }}
+          password: ${{ secrets.INFINITYFREE_PASSWORD }}
+          server: ${{ secrets.INFINITYFREE_FTP_HOST }}
+          protocol: ftp
+          port: 21
+          server-dir: /htdocs/
+          local-dir: ./
+          exclude: |
+            **/.git*/**
+            **/.gitignore
+            **/.github*/**
