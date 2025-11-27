@@ -5,7 +5,7 @@ require_once 'BaseModel.php';
 
 class MemberModel extends BaseModel {
 
-    // Ambil semua data member
+    // Ambil semua data member  
     public function getAllMembers() {
         $sql = "SELECT * FROM Member ORDER BY MemName ASC";
         return $this->fetchAll($sql);
