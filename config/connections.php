@@ -2,9 +2,9 @@
 // config/connections.php
 
 class Database {
-    private $host = "localhost";
-    private $username = "root";
-    private $password = "";
+    private $host = "mysql";
+    private $username = "appuser";
+    private $password = "password";
     private $database = "librix";
     public $conn;
 
