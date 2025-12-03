@@ -7,19 +7,19 @@ class OfficerModel extends BaseModel {
 
     // Ambil semua officer
     public function getAllOfficers() {
-        $sql = "SELECT * FROM Officer ORDER BY OffID ASC";
+        $sql = "SELECT * FROM officer ORDER BY OffID ASC";
         return $this->fetchAll($sql);
     }
 
     // Ambil officer berdasarkan ID
     public function getOfficerById($OffID) {
-        $sql = "SELECT * FROM Officer WHERE OffID = ?";
+        $sql = "SELECT * FROM officer WHERE OffID = ?";
         return $this->fetch($sql, [$OffID]);
     }
 
     // Ambil officer berdasarkan Email
     public function getOfficerByEmail($OffEmail) {
-        $sql = "SELECT * FROM Officer WHERE OffEmail = ?";
+        $sql = "SELECT * FROM officer WHERE OffEmail = ?";
         return $this->fetch($sql, [$OffEmail]);
     }
 

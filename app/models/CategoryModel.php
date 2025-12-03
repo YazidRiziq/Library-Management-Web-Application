@@ -7,13 +7,13 @@ class CategoryModel extends BaseModel {
 
     // Ambil semua kategori
     public function getAllCategories() {
-        $sql = "SELECT * FROM BookCategory ORDER BY CatName ASC";
+        $sql = "SELECT * FROM bookcategory ORDER BY CatName ASC";
         return $this->fetchAll($sql);
     }
 
     // Ambil satu kategori berdasarkan ID
     public function getCategoryById($CatCode) {
-        $sql = "SELECT * FROM BookCategory WHERE CatCode = ?";
+        $sql = "SELECT * FROM bookcategory WHERE CatCode = ?";
         return $this->fetch($sql, [$CatCode]);
     }
 
@@ -25,7 +25,7 @@ class CategoryModel extends BaseModel {
 
     // Update kategori
     public function updateCategory($CatName, $CatCode) {
-        $sql = "UPDATE BookCategory SET CatName = ? WHERE CatCode = ?";
+        $sql = "UPDATE bookcategory SET CatName = ? WHERE CatCode = ?";
         $this->query($sql, [$CatName, $CatCode]);
     }
 
